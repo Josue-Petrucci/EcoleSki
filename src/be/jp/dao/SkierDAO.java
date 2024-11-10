@@ -66,8 +66,27 @@ public class SkierDAO extends DAO<Skier> {
 
 	@Override
 	public boolean update(Skier obj) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean result = false;
+		try {
+			String query = "UPDATE es_skier SET name = ?, firstname = ?, email = ?, phone = ?, dob = ?, street = ?, houseNbr = ?, city = ?, postalCode = ? WHERE id = ?";
+			PreparedStatement pst = conn.prepareStatement(query);
+			pst.setString(1, obj.getName());
+	        pst.setString(2, obj.getFirstname());
+	        pst.setString(3, obj.getEmail());
+	        pst.setString(4, obj.getPhone());
+	        pst.setDate(5, new java.sql.Date(obj.getDob().getTime()));
+	        pst.setString(6, obj.getStreet());
+	        pst.setInt(7, Integer.parseInt(obj.getHouseNbr()));
+	        pst.setString(8, obj.getCity());
+	        pst.setInt(9, Integer.parseInt(obj.getPostalCode()));
+	        pst.setInt(10, obj.getId());
+	        pst.executeUpdate();
+	        result = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			result = false;
+		}
+		return result;
 	}
 
 	@Override

@@ -26,46 +26,7 @@ public class Skier extends Person implements Serializable {
 	}
 	
 	public String creatSkier() {
-		String message = null;
-		
-		if(name.isEmpty()) {
-			message = "Name is required!";
-		} else if(firstname.isEmpty()) {
-			message = "Firstname is required!";
-		} else if(email.isEmpty()) {
-			message = "Email is required!";
-		} else if(phone.isEmpty()) {
-			message = "Phone number is required!";
-		}   else if(dob == null) {
-			message = "Date of birth is required!";
-		} else if(street.isEmpty()) {
-			message = "the street is required!";
-		} else if(houseNbr.isEmpty()) {
-			message = "the house number is required!";
-		} else if(city.isEmpty()) {
-			message = "the city is required!";
-		} else if(postalCode.isEmpty()) {
-			message = "the postal code is required!";
-		}
-		
-		if (!name.matches("[a-zA-ZÀ-ÿ]+")) {
-            message = "The name must contain only letters!";
-        } else if(!firstname.matches("[a-zA-ZÀ-ÿ]+")) {
-        	message = "The firstname must contain only letters!";
-        } else if (!email.matches("^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$")) {
-            message = "Invalid email format!";
-        } else if (!phone.matches("^(\\+\\d{1,3}|00\\d{1,3})?[- ]?(0?\\d{1,2})?([- ]?\\d{2}){4}$")) {
-            message = "Invalid Phone number format!";
-        } else if(!street.matches("[A-Za-zÀ-ÿ ]+")) {
-        	message = "The street must contain only letters!";
-        } else if(!houseNbr.matches("[1-9][0-9]{0,2}")) {
-        	message = "The house number must contain only number!";
-        } else if(!city.matches("[A-Za-zÀ-ÿ ]+")) {
-        	message = "The city must contain only letters!";
-        } else if(!postalCode.matches("[1-9][0-9]{0,3}")) {
-        	message = "The postal code must contain only number!";
-        }
-		
+		String message = this.verifietForm();
 		if(message == null) {
 			SkierDAO s = new SkierDAO(SchoolSkyConnection.getInstance());
 			if(s.create(this))
@@ -88,6 +49,32 @@ public class Skier extends Person implements Serializable {
 			return true;
 		} else {
 			JOptionPane.showMessageDialog(null, "Deletion error, contact the IT manager !", "ERROR", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+	}
+	
+	public boolean updateSkier(Skier skier) {
+		String message = skier.verifietForm();
+		if(message == null) {
+			setName(skier.getName());
+			setFirstname(skier.getFirstname());
+			setEmail(skier.getEmail());
+			setPhone(skier.getPhone());
+			setDob(skier.getDob());
+			setStreet(skier.getStreet());
+			setHouseNbr(skier.getHouseNbr());
+			setCity(skier.getCity());
+			setPostalCode(skier.getPostalCode());
+			SkierDAO s = new SkierDAO(SchoolSkyConnection.getInstance());
+			if(s.update(this)) {
+				JOptionPane.showMessageDialog(null, "The person has been update !", "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
+				return true;
+			} else {
+				JOptionPane.showMessageDialog(null, "Update error, contact the IT manager !", "ERROR", JOptionPane.ERROR_MESSAGE);
+				return false;
+			}
+		} else {
+			JOptionPane.showMessageDialog(null, message, "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
 			return false;
 		}
 	}

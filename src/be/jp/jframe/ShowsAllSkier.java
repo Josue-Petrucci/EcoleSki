@@ -134,7 +134,6 @@ public class ShowsAllSkier extends JFrame {
 	
 	private void selectSkier() {
 		selectedRow = table.getSelectedRow();
-		System.out.println(selectedRow);
 		if(selectedRow != -1) {
 			Skier s = skiers.get(selectedRow);
 			ShowSkier showSkier = new ShowSkier(this, s, selectedRow);
@@ -185,8 +184,15 @@ public class ShowsAllSkier extends JFrame {
 		}
 	}
 	
-	public void deleteTableRow(Skier updatedPerson, int rowIndex) {
+	public void deleteTableRow(int rowIndex) {
 		skiers.remove(rowIndex);
 		model.removeRow(rowIndex);
+    }
+	
+	public void updateTableRow(Skier updatedSkier, int rowIndex) {
+        model.setValueAt(updatedSkier.getName(), rowIndex, 1);
+        model.setValueAt(updatedSkier.getFirstname(), rowIndex, 2);
+        model.setValueAt(updatedSkier.getEmail(), rowIndex, 3);
+        model.setValueAt(updatedSkier.getPhone(), rowIndex, 4);
     }
 }

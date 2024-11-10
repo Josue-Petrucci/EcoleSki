@@ -18,6 +18,7 @@ import java.awt.event.ActionEvent;
 public class ShowSkier extends JFrame {
 
 	private static final long serialVersionUID = 1L;
+	private ShowsAllSkier frameAllSkier;
 	private JPanel contentPane;
 
 	/**
@@ -40,8 +41,10 @@ public class ShowSkier extends JFrame {
 	 * Create the frame.
 	 */
 	public ShowSkier(ShowsAllSkier frameAllSkier, Skier s, int row) {
+		this.frameAllSkier = frameAllSkier;
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 320, 450);
+		setBounds(100, 100, 311, 474);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -151,23 +154,35 @@ public class ShowSkier extends JFrame {
 			}
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnNewButton.setBounds(10, 358, 278, 45);
+		btnNewButton.setBounds(10, 383, 278, 45);
 		contentPane.add(btnNewButton);
 		
 		JButton btnDelete = new JButton("Delete");
 		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				delete(frameAllSkier, s, row);
+				delete(s, row);
 			}
 		});
 		btnDelete.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnDelete.setBounds(10, 303, 278, 45);
+		btnDelete.setBounds(10, 328, 278, 45);
 		contentPane.add(btnDelete);
+		
+		JButton btnUpdate = new JButton("Update");
+		btnUpdate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				UpdateSkier updateskier = new UpdateSkier(frameAllSkier, s, row);
+				updateskier.setVisible(true);
+				dispose();
+			}
+		});
+		btnUpdate.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnUpdate.setBounds(10, 273, 278, 45);
+		contentPane.add(btnUpdate);
 	}
 
-	private void delete(ShowsAllSkier frameAllSkier, Skier s, int row) {
+	private void delete(Skier s, int row) {
 		if(s.deleteSkier()) {
-			frameAllSkier.deleteTableRow(s, row);
+			frameAllSkier.deleteTableRow(row);
 		}
 		dispose();
 	}

@@ -101,6 +101,46 @@ public abstract class Person implements Serializable {
 		this.postalCode = postalCode;
 	}
 	
+	public String verifietForm() {
+		if(name.isEmpty()) {
+			return "Name is required!";
+		} else if(firstname.isEmpty()) {
+			return "Firstname is required!";
+		} else if(email.isEmpty()) {
+			return "Email is required!";
+		} else if(phone.isEmpty()) {
+			return "Phone number is required!";
+		}   else if(dob == null) {
+			return "Date of birth is required!";
+		} else if(street.isEmpty()) {
+			return "the street is required!";
+		} else if(houseNbr.isEmpty()) {
+			return "the house number is required!";
+		} else if(city.isEmpty()) {
+			return "the city is required!";
+		} else if(postalCode.isEmpty()) {
+			return "the postal code is required!";
+		}		
+		if (!name.matches("[a-zA-ZÀ-ÿ]+")) {
+			return "The name must contain only letters!";
+        } else if(!firstname.matches("[a-zA-ZÀ-ÿ]+")) {
+        	return "The firstname must contain only letters!";
+        } else if (!email.matches("^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$")) {
+        	return "Invalid email format!";
+        } else if (!phone.matches("^(\\+\\d{1,3}|00\\d{1,3})?[- ]?(0?\\d{1,2})?([- ]?\\d{2}){4}$")) {
+        	return "Invalid Phone number format!";
+        } else if(!street.matches("[A-Za-zÀ-ÿ ]+")) {
+        	return "The street must contain only letters!";
+        } else if(!houseNbr.matches("[1-9][0-9]{0,2}")) {
+        	return "The house number must contain only number!";
+        } else if(!city.matches("[A-Za-zÀ-ÿ ]+")) {
+        	return "The city must contain only letters!";
+        } else if(!postalCode.matches("[1-9][0-9]{0,3}")) {
+        	return "The postal code must contain only number!";
+        }
+		return	null;
+	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		Person p = null;

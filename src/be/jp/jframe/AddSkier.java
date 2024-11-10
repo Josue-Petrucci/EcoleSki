@@ -153,7 +153,6 @@ public class AddSkier extends JFrame {
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				creatSkier();
-				dispose();
 			}
 		});
 		btnAdd.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -186,5 +185,6 @@ public class AddSkier extends JFrame {
 	            return;
 			}
 		}
+		dispose();
 	}
 }
