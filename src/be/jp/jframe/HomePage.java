@@ -58,5 +58,15 @@ public class HomePage extends JFrame {
 		});
 		btnCreatSkier.setBounds(10, 40, 127, 21);
 		panel.add(btnCreatSkier);
+		
+		JButton btnShowsAllSkier = new JButton("See all the skier");
+		btnShowsAllSkier.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ShowsAllSkier showsAllSkier = new ShowsAllSkier();
+				showsAllSkier.setVisible(true);
+			}
+		});
+		btnShowsAllSkier.setBounds(10, 71, 127, 21);
+		panel.add(btnShowsAllSkier);
 	}
 }

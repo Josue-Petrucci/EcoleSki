@@ -1,6 +1,7 @@
 package be.jp.pojo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.swing.JOptionPane;
@@ -16,6 +17,12 @@ public class Skier extends Person implements Serializable {
 	public Skier(String name, String firstname, String email, String phoneNbr, Date dob, 
 			String street, String houseNbr, String city, String postalCode) {
 		super(name, firstname, email, phoneNbr, dob, street, houseNbr, city, postalCode);
+	}
+	
+	public Skier(String name, String firstname, String email, String phoneNbr, Date dob, 
+			String street, String houseNbr, String city, String postalCode , int id) {
+		this(name, firstname, email, phoneNbr, dob, street, houseNbr, city, postalCode);
+		this.id = id;
 	}
 	
 	public String creatSkier() {
@@ -67,5 +74,10 @@ public class Skier extends Person implements Serializable {
 				JOptionPane.showMessageDialog(null, "Creation error, contact the IT manager !", "ERROR", JOptionPane.ERROR_MESSAGE);
 		}
 		return message;
+	}
+	
+	public static ArrayList<Skier> findsAllSkier(){
+		SkierDAO p = new SkierDAO(SchoolSkyConnection.getInstance());
+		return p.finds();
 	}
 }

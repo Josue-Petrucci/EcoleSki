@@ -2,6 +2,7 @@ package be.jp.dao;
 
 import java.sql.Connection;
 import java.sql.Date;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -66,8 +67,38 @@ public class SkierDAO extends DAO<Skier> {
 
 	@Override
 	public ArrayList<Skier> finds() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Skier> skiers = new ArrayList<Skier>();
+		Skier s = null;
+		try {
+			String query = "SELECT * FROM es_skier ORDER BY name ASC, firstname ASC";
+			pst = conn.prepareStatement(query);
+			
+			ResultSet rs = pst.executeQuery();
+			while(rs.next()) {
+				s = new Skier(
+						rs.getString("name"),
+						rs.getString("firstname"),
+						rs.getString("email"),
+						rs.getString("phone"),
+						rs.getDate("dob"),
+						rs.getString("street"),
+						Integer.toString(rs.getInt("houseNbr")),
+						rs.getString("city"),
+						Integer.toString(rs.getInt("postalCode")),
+						rs.getInt("id"));
+				
+				skiers.add(s);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+                if (pst != null) pst.close();                
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+		}
+		return skiers;
 	}
 
 }
