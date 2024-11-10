@@ -16,6 +16,9 @@ import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JOptionPane;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 public class ShowsAllSkier extends JFrame {
 
@@ -24,7 +27,9 @@ public class ShowsAllSkier extends JFrame {
 	private JTable table;
 	private DefaultTableModel model;
 	private ArrayList<Skier> skiers;
-	private JButton btnCancel;
+	private int selectedRow;
+	private JTextField tfNameS;
+	private JTextField tfFirstnameS;
 
 	/**
 	 * Launch the application.
@@ -67,7 +72,7 @@ public class ShowsAllSkier extends JFrame {
 		table = new JTable(model);
 		scrollPane.setViewportView(table);
 		
-		btnCancel = new JButton("Cancel");
+		JButton btnCancel = new JButton("Cancel");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
@@ -76,6 +81,44 @@ public class ShowsAllSkier extends JFrame {
 		btnCancel.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnCancel.setBounds(673, 289, 103, 64);
 		contentPane.add(btnCancel);
+		
+		JButton btnSelect = new JButton("Select the skier");
+		btnSelect.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				selectSkier();
+			}
+		});
+		btnSelect.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnSelect.setBounds(476, 289, 162, 64);
+		contentPane.add(btnSelect);
+		
+		JLabel lblNewLabel = new JLabel("Name:");
+		lblNewLabel.setBounds(20, 289, 90, 25);
+		contentPane.add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("Firstname:");
+		lblNewLabel_1.setBounds(20, 328, 90, 25);
+		contentPane.add(lblNewLabel_1);
+		
+		tfNameS = new JTextField();
+		tfNameS.setBounds(120, 290, 150, 25);
+		contentPane.add(tfNameS);
+		tfNameS.setColumns(10);
+		
+		tfFirstnameS = new JTextField();
+		tfFirstnameS.setColumns(10);
+		tfFirstnameS.setBounds(120, 328, 150, 25);
+		contentPane.add(tfFirstnameS);
+		
+		JButton btnNewButton = new JButton("Search a skier");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				searchSkier();
+			}
+		});
+		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnNewButton.setBounds(283, 289, 162, 64);
+		contentPane.add(btnNewButton);
 		
 		skiers = Skier.findsAllSkier();
 		for(Skier s:skiers) {
@@ -86,6 +129,56 @@ public class ShowsAllSkier extends JFrame {
 					s.getEmail(),
 					s.getPhone()
 			});
+		}
+	}
+	
+	private void selectSkier() {
+		selectedRow = table.getSelectedRow();
+		if(selectedRow != -1) {
+			Skier s = skiers.get(selectedRow);
+			ShowSkier showSkier = new ShowSkier(this, s);
+			showSkier.setVisible(true);
+		} else {
+			JOptionPane.showMessageDialog(null, "You must choose a line !", "ERROR", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+	}
+	
+	private void searchSkier() {
+		String message = "";
+		String nameSearch = tfNameS.getText();
+		String firstnameSearch = tfFirstnameS.getText();
+		
+		if(nameSearch.isEmpty()) {
+			JOptionPane.showMessageDialog(this, "Name is required!", "ERROR", JOptionPane.ERROR_MESSAGE);
+			return;
+		} else if(firstnameSearch.isEmpty()) {
+			JOptionPane.showMessageDialog(this, "Firstname is required!", "ERROR", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		
+		if (!nameSearch.matches("[a-zA-ZÀ-ÿ]+")) {
+			JOptionPane.showMessageDialog(this, "The name must contain only letters!", "ERROR", JOptionPane.ERROR_MESSAGE);
+			return;
+        } else if(!firstnameSearch.matches("[a-zA-ZÀ-ÿ]+")) {
+        	JOptionPane.showMessageDialog(this, "The firstname must contain only letters!", "ERROR", JOptionPane.ERROR_MESSAGE);
+        	return;
+        }
+		
+		if(message.isEmpty()) {
+			boolean skierFound = false;
+			for(Skier s:skiers) {
+				if(s.getName().equalsIgnoreCase(nameSearch) && s.getFirstname().equalsIgnoreCase(firstnameSearch)) {
+					ShowSkier showSkier = new ShowSkier(this, s);
+					showSkier.setVisible(true);
+					skierFound = true;
+					break;
+				}
+			}
+			if(!skierFound) {
+				JOptionPane.showMessageDialog(this, "Skier don't found !", "ERROR", JOptionPane.ERROR_MESSAGE);
+        		return;
+			}
 		}
 	}
 }
