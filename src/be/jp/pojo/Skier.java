@@ -67,8 +67,8 @@ public class Skier extends Person implements Serializable {
         }
 		
 		if(message == null) {
-			SkierDAO p = new SkierDAO(SchoolSkyConnection.getInstance());
-			if(p.create(this))
+			SkierDAO s = new SkierDAO(SchoolSkyConnection.getInstance());
+			if(s.create(this))
 				JOptionPane.showMessageDialog(null, "A " + name + " " + firstname + " has been created !", "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
 			else
 				JOptionPane.showMessageDialog(null, "Creation error, contact the IT manager !", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -77,7 +77,18 @@ public class Skier extends Person implements Serializable {
 	}
 	
 	public static ArrayList<Skier> findsAllSkier(){
-		SkierDAO p = new SkierDAO(SchoolSkyConnection.getInstance());
-		return p.finds();
+		SkierDAO s = new SkierDAO(SchoolSkyConnection.getInstance());
+		return s.finds();
+	}
+	
+	public boolean deleteSkier() {
+		SkierDAO s = new SkierDAO(SchoolSkyConnection.getInstance());
+		if(s.delete(this)) {
+			JOptionPane.showMessageDialog(null, "The person has been deleted !", "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
+			return true;
+		} else {
+			JOptionPane.showMessageDialog(null, "Deletion error, contact the IT manager !", "ERROR", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
 	}
 }

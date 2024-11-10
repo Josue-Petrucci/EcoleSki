@@ -27,7 +27,7 @@ public class ShowSkier extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ShowSkier frame = new ShowSkier(null, null);
+					ShowSkier frame = new ShowSkier(null, null, -404);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -39,7 +39,7 @@ public class ShowSkier extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ShowSkier(ShowsAllSkier frame, Skier s) {
+	public ShowSkier(ShowsAllSkier frameAllSkier, Skier s, int row) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 320, 450);
 		contentPane = new JPanel();
@@ -151,8 +151,24 @@ public class ShowSkier extends JFrame {
 			}
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnNewButton.setBounds(10, 273, 278, 45);
+		btnNewButton.setBounds(10, 358, 278, 45);
 		contentPane.add(btnNewButton);
+		
+		JButton btnDelete = new JButton("Delete");
+		btnDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				delete(frameAllSkier, s, row);
+			}
+		});
+		btnDelete.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnDelete.setBounds(10, 303, 278, 45);
+		contentPane.add(btnDelete);
 	}
 
+	private void delete(ShowsAllSkier frameAllSkier, Skier s, int row) {
+		if(s.deleteSkier()) {
+			frameAllSkier.deleteTableRow(s, row);
+		}
+		dispose();
+	}
 }

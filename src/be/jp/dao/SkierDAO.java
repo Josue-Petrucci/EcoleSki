@@ -2,6 +2,7 @@ package be.jp.dao;
 
 import java.sql.Connection;
 import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -49,8 +50,18 @@ public class SkierDAO extends DAO<Skier> {
 
 	@Override
 	public boolean delete(Skier obj) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean result = false;
+		try{
+			String query = "DELETE FROM es_skier WHERE id = ?";
+			PreparedStatement pst = conn.prepareStatement(query);
+			pst.setInt(1, obj.getId());
+			pst.executeUpdate();
+			result = true;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			result = false;
+		}
+		return result;
 	}
 
 	@Override

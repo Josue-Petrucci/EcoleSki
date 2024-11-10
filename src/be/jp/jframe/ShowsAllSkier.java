@@ -134,9 +134,10 @@ public class ShowsAllSkier extends JFrame {
 	
 	private void selectSkier() {
 		selectedRow = table.getSelectedRow();
+		System.out.println(selectedRow);
 		if(selectedRow != -1) {
 			Skier s = skiers.get(selectedRow);
-			ShowSkier showSkier = new ShowSkier(this, s);
+			ShowSkier showSkier = new ShowSkier(this, s, selectedRow);
 			showSkier.setVisible(true);
 		} else {
 			JOptionPane.showMessageDialog(null, "You must choose a line !", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -167,13 +168,15 @@ public class ShowsAllSkier extends JFrame {
 		
 		if(message.isEmpty()) {
 			boolean skierFound = false;
+			int row = 0;
 			for(Skier s:skiers) {
 				if(s.getName().equalsIgnoreCase(nameSearch) && s.getFirstname().equalsIgnoreCase(firstnameSearch)) {
-					ShowSkier showSkier = new ShowSkier(this, s);
+					ShowSkier showSkier = new ShowSkier(this, s, row);
 					showSkier.setVisible(true);
 					skierFound = true;
 					break;
 				}
+				row++;
 			}
 			if(!skierFound) {
 				JOptionPane.showMessageDialog(this, "Skier don't found !", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -181,4 +184,9 @@ public class ShowsAllSkier extends JFrame {
 			}
 		}
 	}
+	
+	public void deleteTableRow(Skier updatedPerson, int rowIndex) {
+		skiers.remove(rowIndex);
+		model.removeRow(rowIndex);
+    }
 }
