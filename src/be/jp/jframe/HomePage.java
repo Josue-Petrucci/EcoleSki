@@ -45,7 +45,7 @@ public class HomePage extends JFrame {
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "Skier", TitledBorder.LEFT, TitledBorder.TOP, null, null));
-		panel.setBounds(10, 10, 147, 133);
+		panel.setBounds(10, 10, 147, 91);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -56,7 +56,7 @@ public class HomePage extends JFrame {
 				addSkier.setVisible(true);
 			}
 		});
-		btnCreatSkier.setBounds(10, 40, 127, 21);
+		btnCreatSkier.setBounds(10, 27, 127, 21);
 		panel.add(btnCreatSkier);
 		
 		JButton btnShowsAllSkier = new JButton("See all the skier");
@@ -66,7 +66,23 @@ public class HomePage extends JFrame {
 				showsAllSkier.setVisible(true);
 			}
 		});
-		btnShowsAllSkier.setBounds(10, 71, 127, 21);
+		btnShowsAllSkier.setBounds(10, 58, 127, 21);
 		panel.add(btnShowsAllSkier);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBorder(new TitledBorder(null, "Instructor", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_1.setBounds(10, 111, 147, 91);
+		contentPane.add(panel_1);
+		panel_1.setLayout(null);
+		
+		JButton btnAddAInstructor = new JButton("Add a Instructor");
+		btnAddAInstructor.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddInstructor addInstructor = new AddInstructor();
+				addInstructor.setVisible(true);
+			}
+		});
+		btnAddAInstructor.setBounds(10, 24, 127, 21);
+		panel_1.add(btnAddAInstructor);
 	}
 }

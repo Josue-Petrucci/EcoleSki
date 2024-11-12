@@ -14,14 +14,14 @@ public class Skier extends Person implements Serializable {
 
 	public Skier() {}
 	
-	public Skier(String name, String firstname, String email, String phoneNbr, Date dob, 
+	public Skier(String name, String firstname, String email, String phone, Date dob, 
 			String street, String houseNbr, String city, String postalCode) {
-		super(name, firstname, email, phoneNbr, dob, street, houseNbr, city, postalCode);
+		super(name, firstname, email, phone, dob, street, houseNbr, city, postalCode);
 	}
 	
-	public Skier(String name, String firstname, String email, String phoneNbr, Date dob, 
+	public Skier(String name, String firstname, String email, String phone, Date dob, 
 			String street, String houseNbr, String city, String postalCode , int id) {
-		this(name, firstname, email, phoneNbr, dob, street, houseNbr, city, postalCode);
+		this(name, firstname, email, phone, dob, street, houseNbr, city, postalCode);
 		this.id = id;
 	}
 	
