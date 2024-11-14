@@ -71,7 +71,7 @@ public class HomePage extends JFrame {
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new TitledBorder(null, "Instructor", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_1.setBounds(10, 111, 147, 91);
+		panel_1.setBounds(165, 10, 172, 91);
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 		
@@ -82,7 +82,17 @@ public class HomePage extends JFrame {
 				addInstructor.setVisible(true);
 			}
 		});
-		btnAddAInstructor.setBounds(10, 24, 127, 21);
+		btnAddAInstructor.setBounds(10, 24, 152, 21);
 		panel_1.add(btnAddAInstructor);
+		
+		JButton btnSeeAllThe = new JButton("See all the Instructor");
+		btnSeeAllThe.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ShowsAllInstructor showsAllInstructor = new ShowsAllInstructor();
+				showsAllInstructor.setVisible(true);
+			}
+		});
+		btnSeeAllThe.setBounds(10, 55, 152, 21);
+		panel_1.add(btnSeeAllThe);
 	}
 }

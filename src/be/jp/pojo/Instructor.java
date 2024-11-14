@@ -29,6 +29,12 @@ public class Instructor extends Person implements Serializable{
 		listAccreditation = new ArrayList<Accreditation>();
 		addAccreditation(accreditation);
 	}
+	
+	public Instructor(String name, String firstname, String email, String phone, Date dob, 
+			String street, String houseNbr, String city, String postalCode, Accreditation accreditation, int id) {
+		this(name, firstname, email, phone, dob, street, houseNbr, city, postalCode, accreditation);
+		this.id = id;
+	}
 
 	public void addAccreditation(Accreditation ac) {
 		if(!listAccreditation.contains(ac)) {
@@ -47,5 +53,10 @@ public class Instructor extends Person implements Serializable{
 				JOptionPane.showMessageDialog(null, "Creation error, contact the IT manager !", "ERROR", JOptionPane.ERROR_MESSAGE);
 		}
 		return message;
+	}
+	
+	public static ArrayList<Instructor> getAllInstructor(){
+		InstructorDAO i = new InstructorDAO(SchoolSkyConnection.getInstance());
+		return i.finds();
 	}
 }
