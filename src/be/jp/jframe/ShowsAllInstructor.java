@@ -2,7 +2,6 @@ package be.jp.jframe;
 
 import java.awt.EventQueue;
 import java.awt.Font;
-import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -16,7 +15,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import be.jp.pojo.Instructor;
-import be.jp.pojo.Skier;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -185,4 +183,11 @@ public class ShowsAllInstructor extends JFrame {
 			}
 		}
 	}
+	
+	public void updateTableRow(Instructor updateInstructor, int rowIndex) {
+        model.setValueAt(updateInstructor.getName(), rowIndex, 1);
+        model.setValueAt(updateInstructor.getFirstname(), rowIndex, 2);
+        model.setValueAt(updateInstructor.getEmail(), rowIndex, 3);
+        model.setValueAt(updateInstructor.getPhone(), rowIndex, 4);
+    }
 }

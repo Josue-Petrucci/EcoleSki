@@ -186,5 +186,17 @@ public class showInstructor extends JFrame {
 			}
 			i+=25;
 		}
+		
+		JButton btnUpdate = new JButton("Update");
+		btnUpdate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				UpdateInstructor updateInstructor = new UpdateInstructor(saiFrame, instructor, row);
+				updateInstructor.setVisible(true);
+				dispose();
+			}
+		});
+		btnUpdate.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnUpdate.setBounds(10, 273, 278, 45);
+		contentPane.add(btnUpdate);
 	}
 }

@@ -35,6 +35,11 @@ public class Instructor extends Person implements Serializable{
 		this(name, firstname, email, phone, dob, street, houseNbr, city, postalCode, accreditation);
 		this.id = id;
 	}
+	
+	public Instructor(String name, String firstname, String email, String phone, Date dob, 
+			String street, String houseNbr, String city, String postalCode) {
+		super(name, firstname, email, phone, dob, street, houseNbr, city, postalCode);
+	}
 
 	public void addAccreditation(Accreditation ac) {
 		if(!listAccreditation.contains(ac)) {
@@ -66,5 +71,31 @@ public class Instructor extends Person implements Serializable{
 				return true;
 		}
 		return false;
+	}
+	
+	public boolean updateInstructor(Instructor instructor) {
+		String message = instructor.verifietForm();
+		if(message == null) {
+			setName(instructor.getName());
+			setFirstname(instructor.getFirstname());
+			setEmail(instructor.getEmail());
+			setPhone(instructor.getPhone());
+			setDob(instructor.getDob());
+			setStreet(instructor.getStreet());
+			setHouseNbr(instructor.getHouseNbr());
+			setCity(instructor.getCity());
+			setPostalCode(instructor.getPostalCode());
+			InstructorDAO i = new InstructorDAO(SchoolSkyConnection.getInstance());
+			if(i.update(this)) {
+				JOptionPane.showMessageDialog(null, "The person has been update !", "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
+				return true;
+			} else {
+				JOptionPane.showMessageDialog(null, "Update error, contact the IT manager !", "ERROR", JOptionPane.ERROR_MESSAGE);
+				return false;
+			}
+		} else {
+			JOptionPane.showMessageDialog(null, message, "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
+			return false;
+		}
 	}
 }

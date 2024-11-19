@@ -1,27 +1,27 @@
 package be.jp.jframe;
 
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
 import java.awt.Font;
-import javax.swing.JTextField;
-import com.toedter.calendar.JDateChooser;
-
-import be.jp.pojo.Skier;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 
-public class UpdateSkier extends JFrame {
+import com.toedter.calendar.JDateChooser;
+
+import be.jp.pojo.Instructor;
+
+public class UpdateInstructor extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private ShowsAllSkier frameAllSkier;
 	private JPanel contentPane;
+	private ShowsAllInstructor saiFrame;
 	private JTextField tfNameU;
 	private JTextField tfFirstnameU;
 	private JTextField tfEmailU;
@@ -39,7 +39,7 @@ public class UpdateSkier extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					UpdateSkier frame = new UpdateSkier(null, null, -404);
+					UpdateInstructor frame = new UpdateInstructor(null, null, -404);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -51,8 +51,8 @@ public class UpdateSkier extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public UpdateSkier(ShowsAllSkier frameAllSkier, Skier s, int row) {
-		this.frameAllSkier = frameAllSkier;
+	public UpdateInstructor(ShowsAllInstructor saiFrame, Instructor instructor, int row) {
+		this.saiFrame = saiFrame;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 275, 377);
@@ -62,7 +62,7 @@ public class UpdateSkier extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel_1 = new JLabel("Edit a Skier");
+		JLabel lblNewLabel_1 = new JLabel("Edit a Instructor");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblNewLabel_1.setBounds(10, 10, 251, 20);
@@ -157,7 +157,7 @@ public class UpdateSkier extends JFrame {
 		JButton btnUpdate = new JButton("Update");
 		btnUpdate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				update(s, row);
+				update(instructor, row);
 			}
 		});
 		btnUpdate.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -174,19 +174,19 @@ public class UpdateSkier extends JFrame {
 		btnCancele.setBounds(20, 291, 85, 40);
 		contentPane.add(btnCancele);
 		
-		tfNameU.setText(s.getName());
-		tfFirstnameU.setText(s.getFirstname());
-		tfEmailU.setText(s.getEmail());
-		tfPhoneU.setText(s.getPhone());
-		dcDobU.setDate(s.getDob());
-		tfStreetU.setText(s.getStreet());
-		tfHouseU.setText(s.getHouseNbr());
-		tfCityU.setText(s.getCity());
-		tfPostalCodeU.setText(s.getPostalCode());
+		tfNameU.setText(instructor.getName());
+		tfFirstnameU.setText(instructor.getFirstname());
+		tfEmailU.setText(instructor.getEmail());
+		tfPhoneU.setText(instructor.getPhone());
+		dcDobU.setDate(instructor.getDob());
+		tfStreetU.setText(instructor.getStreet());
+		tfHouseU.setText(instructor.getHouseNbr());
+		tfCityU.setText(instructor.getCity());
+		tfPostalCodeU.setText(instructor.getPostalCode());
 	}
-	
-	private void update(Skier s, int row) {
-		Skier updateSkier = new Skier(
+
+	private void update(Instructor instructor, int row) {
+		Instructor updateInstructor = new Instructor(
 				tfNameU.getText(),
 				tfFirstnameU.getText(),
 				tfEmailU.getText(),
@@ -196,10 +196,9 @@ public class UpdateSkier extends JFrame {
 				tfHouseU.getText(),
 				tfCityU.getText(),
 				tfPostalCodeU.getText());
-		if(s.updateSkier(updateSkier)) {
-			frameAllSkier.updateTableRow(s, row);
+		if(instructor.updateInstructor(updateInstructor)) {
+			saiFrame.updateTableRow(instructor, row);
 			dispose();
 		}
 	}
-
 }
