@@ -59,4 +59,12 @@ public class Instructor extends Person implements Serializable{
 		InstructorDAO i = new InstructorDAO(SchoolSkyConnection.getInstance());
 		return i.finds();
 	}
+	
+	public boolean isAccreditate(Accreditation accreditation) {
+		for(Accreditation a:listAccreditation) {
+			if(a.getId() == accreditation.getId() & a.getName().equals(accreditation.getName()))
+				return true;
+		}
+		return false;
+	}
 }

@@ -14,6 +14,7 @@ import java.text.SimpleDateFormat;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.SwingConstants;
 
 public class ShowSkier extends JFrame {
 
@@ -53,52 +54,53 @@ public class ShowSkier extends JFrame {
 		
 		JLabel lblNewLabel = new JLabel("Name:");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblNewLabel.setBounds(10, 66, 95, 13);
+		lblNewLabel.setBounds(10, 66, 278, 13);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblFirstname = new JLabel("Firstname:");
 		lblFirstname.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblFirstname.setBounds(10, 89, 95, 13);
+		lblFirstname.setBounds(10, 89, 278, 13);
 		contentPane.add(lblFirstname);
 		
 		JLabel lblEmail = new JLabel("Email:");
 		lblEmail.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblEmail.setBounds(10, 112, 95, 13);
+		lblEmail.setBounds(10, 112, 278, 13);
 		contentPane.add(lblEmail);
 		
 		JLabel lblPhone = new JLabel("Phone:");
 		lblPhone.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblPhone.setBounds(10, 135, 95, 13);
+		lblPhone.setBounds(10, 135, 278, 13);
 		contentPane.add(lblPhone);
 		
 		JLabel lblDateOfBirht = new JLabel("Date of birht:");
 		lblDateOfBirht.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblDateOfBirht.setBounds(10, 158, 95, 13);
+		lblDateOfBirht.setBounds(10, 158, 278, 13);
 		contentPane.add(lblDateOfBirht);
 		
 		JLabel lblStreet = new JLabel("Street:");
 		lblStreet.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblStreet.setBounds(10, 181, 95, 13);
+		lblStreet.setBounds(10, 181, 278, 13);
 		contentPane.add(lblStreet);
 		
 		JLabel lblHouseNumber = new JLabel("House number:");
 		lblHouseNumber.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblHouseNumber.setBounds(10, 204, 95, 13);
+		lblHouseNumber.setBounds(10, 204, 278, 13);
 		contentPane.add(lblHouseNumber);
 		
 		JLabel lblCity = new JLabel("City:");
 		lblCity.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblCity.setBounds(10, 227, 95, 13);
+		lblCity.setBounds(10, 227, 278, 13);
 		contentPane.add(lblCity);
 		
 		JLabel lblIsInstructor = new JLabel("Postal code:");
 		lblIsInstructor.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblIsInstructor.setBounds(10, 250, 95, 13);
+		lblIsInstructor.setBounds(10, 250, 278, 13);
 		contentPane.add(lblIsInstructor);
 		
 		JLabel lblNewLabel_1 = new JLabel("Information Skier");
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblNewLabel_1.setBounds(44, 31, 162, 25);
+		lblNewLabel_1.setBounds(10, 31, 287, 25);
 		contentPane.add(lblNewLabel_1);
 		
 		JLabel lblNameD = new JLabel("New label");

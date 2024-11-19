@@ -1,14 +1,13 @@
 package be.jp.pojo;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 public class LessonType implements Serializable {
 	private static final long serialVersionUID = 2000590571815708816L;
 	private int id;
 	private String levelName;
 	private int price;
-	private ArrayList<Accreditation> listAccreditation = new ArrayList<Accreditation>();
+	private Accreditation accreditation;
 	
 	public int getId() {
 		return id;
@@ -34,27 +33,20 @@ public class LessonType implements Serializable {
 		this.price = price;
 	}
 	
-	public ArrayList<Accreditation> getListAccreditation() {
-		return listAccreditation;
+	public Accreditation getAccreditation() {
+		return accreditation;
 	}
-	
-	public void setListAccreditation(ArrayList<Accreditation> listAccreditation) {
-		this.listAccreditation = listAccreditation;
+
+	public void setAccreditation(Accreditation accreditation) {
+		this.accreditation = accreditation;
 	}
-	
+
 	public LessonType() {}
 	
-	public LessonType(int id, String levelName, int price) {
+	public LessonType(int id, String levelName, int price, Accreditation accreditation) {
 		this.id = id;
 		this.levelName = levelName;
 		this.price = price;
+		this.accreditation = accreditation;
 	}
-	
-	public void addAccreditation(Accreditation ac) {
-		if(!listAccreditation.contains(ac)) {
-			listAccreditation.add(ac);
-			ac.addLessonType(this);
-		}
-	}
-	
 }

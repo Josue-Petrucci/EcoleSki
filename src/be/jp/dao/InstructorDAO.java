@@ -94,8 +94,8 @@ public class InstructorDAO extends DAO<Instructor> {
 					+ "i.city AS instructor_city,i.postalCode AS instructor_postalCode,"
 					+ "a.id AS accreditation_id,a.name AS accreditation_name, "
 					+ "lt.id AS lessontype_id,lt.levelName AS lessontype_levelName,lt.price AS lessontype_price "
-					+ "FROM ES_Instructor i,ES_InstructorAccreditation ia,ES_Accreditation a,ES_AccreditationLessontype al,ES_LessonType lt "
-					+ "WHERE ia.inid = i.Id AND ia.aid = a.id AND al.aid = a.id AND al.ltid = lt.id "
+					+ "FROM ES_Instructor i,ES_InstructorAccreditation ia,ES_Accreditation a,ES_LessonType lt "
+					+ "WHERE ia.inid = i.Id AND ia.aid = a.id AND idAccreditation = a.id "
 					+ "ORDER BY i.name, i.firstname, a.id, lt.id";
 			pst = conn.prepareStatement(query);
 			ResultSet rs = pst.executeQuery();
@@ -105,12 +105,10 @@ public class InstructorDAO extends DAO<Instructor> {
 				int acid = rs.getInt("accreditation_id");
 				int inid = rs.getInt("instructor_id");
 				
-				LessonType lt = new LessonType(rs.getInt("lessontype_id"), rs.getString("lessontype_levelName"), rs.getInt("lessontype_price"));				
-				
 				if(acid == lastAcid) {
-					ac.addLessonType(lt);
+					ac.addLessonType(rs.getInt("lessontype_id"), rs.getString("lessontype_levelName"), rs.getInt("lessontype_price"));
 				} else {
-					ac = new Accreditation(acid, rs.getString("accreditation_name"), lt);
+					ac = new Accreditation(acid, rs.getString("accreditation_name"), rs.getInt("lessontype_id"), rs.getString("lessontype_levelName"), rs.getInt("lessontype_price"));
 				}
 				lastAcid = rs.getInt("accreditation_id");
 				

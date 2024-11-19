@@ -42,27 +42,25 @@ public class AccreditationDAO extends DAO<Accreditation> {
 	public ArrayList<Accreditation> finds() {
 		ArrayList<Accreditation> acs = new ArrayList<Accreditation>();
 		try {
-			String query = "SELECT a.id AS aid, name, l.id AS lid, levelName, price FROM ES_AccreditationLessontype al,"
-					     + " ES_Accreditation a, ES_LessonType l WHERE al.aid = a.id AND al.ltid = l.id ORDER BY a.id, l.id";
+			String query = "SELECT a.id AS aid, name, l.id AS lid, levelName, price FROM ES_Accreditation a, ES_LessonType l"
+					     + " WHERE a.id = l.idAccreditation ORDER BY a.id, l.id";
 			pst = conn.prepareStatement(query);
 			
 			ResultSet rs = pst.executeQuery();
 			while(rs.next()) {
 				int acid = rs.getInt("aid");
-				LessonType lt = new LessonType(rs.getInt("lid"), rs.getString("levelName"), rs.getInt("price"));
 				
 				Accreditation existeAc = null;
 				for(Accreditation a:acs) {
 					if(a.getId() == acid) {
 						existeAc = a;
-						break;
 					}
 				}
 				
 				if(existeAc != null) {
-					existeAc.addLessonType(lt);
+					existeAc.addLessonType(rs.getInt("lid"), rs.getString("levelName"), rs.getInt("price"));
 				} else {
-					Accreditation ac = new Accreditation(acid, rs.getString("name"), lt);
+					Accreditation ac = new Accreditation(acid, rs.getString("name"), rs.getInt("lid"), rs.getString("levelName"), rs.getInt("price"));
 					acs.add(ac);
 				}
 			}
