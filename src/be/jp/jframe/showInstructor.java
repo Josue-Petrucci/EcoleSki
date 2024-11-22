@@ -22,6 +22,8 @@ public class showInstructor extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private ShowsAllInstructor saiFrame;
+	
 
 	/**
 	 * Launch the application.
@@ -43,6 +45,8 @@ public class showInstructor extends JFrame {
 	 * Create the frame.
 	 */
 	public showInstructor(ShowsAllInstructor saiFrame, Instructor instructor, int row) {
+		this.saiFrame = saiFrame;
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 475);
 		contentPane = new JPanel();
@@ -145,7 +149,7 @@ public class showInstructor extends JFrame {
 			}
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnNewButton.setBounds(10, 362, 278, 45);
+		btnNewButton.setBounds(10, 383, 278, 45);
 		contentPane.add(btnNewButton);
 		
 		lblNameD.setText(instructor.getName());
@@ -198,5 +202,22 @@ public class showInstructor extends JFrame {
 		btnUpdate.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnUpdate.setBounds(10, 273, 278, 45);
 		contentPane.add(btnUpdate);
+		
+		JButton btnDelete = new JButton("Delete");
+		btnDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				delete(instructor, row);
+			}
+		});
+		btnDelete.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnDelete.setBounds(10, 328, 278, 45);
+		contentPane.add(btnDelete);
+	}
+	
+	private void delete(Instructor instructor, int row) {
+		if(instructor.deleteInstructor()) {
+			saiFrame.deleteTableRow(row);
+		}
+		dispose();
 	}
 }

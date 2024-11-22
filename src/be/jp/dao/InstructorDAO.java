@@ -65,8 +65,24 @@ public class InstructorDAO extends DAO<Instructor> {
 
 	@Override
 	public boolean delete(Instructor obj) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean result = false;
+		try{
+			String queryA = "DELETE FROM es_instructoraccreditation WHERE inid = ?";
+			PreparedStatement pstA = conn.prepareStatement(queryA);
+			pstA.setInt(1, obj.getId());
+			pstA.executeUpdate();
+			
+			String queryB = "DELETE FROM es_instructor WHERE id = ?";
+			PreparedStatement pstB = conn.prepareStatement(queryB);
+			pstB.setInt(1, obj.getId());
+			pstB.executeUpdate();
+			
+			result = true;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			result = false;
+		}
+		return result;
 	}
 
 	@Override
@@ -74,7 +90,7 @@ public class InstructorDAO extends DAO<Instructor> {
 		boolean result = false;
 		try {
 			String query = "UPDATE es_instructor SET name = ?, firstname = ?, email = ?, phone = ?, dob = ?, street = ?, houseNbr = ?, city = ?, postalCode = ? WHERE id = ?";
-			PreparedStatement pst = conn.prepareStatement(query);
+			pst = conn.prepareStatement(query);
 			pst.setString(1, obj.getName());
 	        pst.setString(2, obj.getFirstname());
 	        pst.setString(3, obj.getEmail());
@@ -90,6 +106,12 @@ public class InstructorDAO extends DAO<Instructor> {
 		} catch (Exception e) {
 			e.printStackTrace();
 			result = false;
+		} finally {
+			try {
+                if (pst != null) pst.close();                
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
 		}
 		return result;
 	}

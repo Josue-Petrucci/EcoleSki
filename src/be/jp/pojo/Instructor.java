@@ -98,4 +98,15 @@ public class Instructor extends Person implements Serializable{
 			return false;
 		}
 	}
+	
+	public boolean deleteInstructor() {
+		InstructorDAO i = new InstructorDAO(SchoolSkyConnection.getInstance());
+		if(i.delete(this)) {
+			JOptionPane.showMessageDialog(null, "The person has been deleted !", "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
+			return true;
+		} else {
+			JOptionPane.showMessageDialog(null, "Deletion error, contact the IT manager !", "ERROR", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+	}
 }

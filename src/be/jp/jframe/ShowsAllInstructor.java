@@ -190,4 +190,9 @@ public class ShowsAllInstructor extends JFrame {
         model.setValueAt(updateInstructor.getEmail(), rowIndex, 3);
         model.setValueAt(updateInstructor.getPhone(), rowIndex, 4);
     }
+	
+	public void deleteTableRow(int rowIndex) {
+		listInstructor.remove(rowIndex);
+		model.removeRow(rowIndex);
+    }
 }
