@@ -7,6 +7,7 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 
 import be.jp.dao.SchoolSkyConnection;
+import be.jp.dao.AccreditationDAO;
 import be.jp.dao.InstructorDAO;
 
 public class Instructor extends Person implements Serializable{
@@ -46,6 +47,11 @@ public class Instructor extends Person implements Serializable{
 			listAccreditation.add(ac);
 			ac.addInstructor(this);
 		}
+	}
+	
+	public void deleteAccreditation(Accreditation ac) {
+		if(listAccreditation.contains(ac))
+			listAccreditation.remove(ac);
 	}
 	
 	public String creatInstructor() {
@@ -107,6 +113,34 @@ public class Instructor extends Person implements Serializable{
 		} else {
 			JOptionPane.showMessageDialog(null, "Deletion error, contact the IT manager !", "ERROR", JOptionPane.ERROR_MESSAGE);
 			return false;
+		}
+	}
+	
+	public void manageAccreditation(String code, Accreditation accreditation) {
+		AccreditationDAO a = new AccreditationDAO(SchoolSkyConnection.getInstance());
+		if(code.equals("Add")) {
+			if(a.AddAccreditation(accreditation, this)) {
+				addAccreditation(accreditation);
+				JOptionPane.showMessageDialog(null, "The Accreditation has been Add !", "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
+				return;
+			} else {
+				JOptionPane.showMessageDialog(null, "Deletion error, contact the IT manager !", "ERROR", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+		} else {
+			if(listAccreditation.size() > 1) {
+				if(a.deleteAccreditation(accreditation, this)) {
+					deleteAccreditation(accreditation);
+					JOptionPane.showMessageDialog(null, "The Accreditation has been deleted !", "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
+					return;
+				} else {
+					JOptionPane.showMessageDialog(null, "Deletion error, contact the IT manager !", "ERROR", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+			} else {
+				JOptionPane.showMessageDialog(null, "Cannot be deleted minimum 1 accreditation !", "ERROR", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
 		}
 	}
 }

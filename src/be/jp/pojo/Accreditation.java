@@ -70,5 +70,24 @@ public class Accreditation implements Serializable {
 		AccreditationDAO ac = new AccreditationDAO(SchoolSkyConnection.getInstance());
 		return ac.finds();
 	}
-
+	
+	@Override
+	public boolean equals(Object obj) {
+		Accreditation a = null;
+		if(obj == null || obj.getClass() != this.getClass()) {
+			return false;
+		}
+		
+		a = (Accreditation)obj;
+		if(a.getName().equals(this.getName()) & a.getId() == this.getId()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	@Override
+	public int hashCode() {
+		return this.getName().hashCode();
+	}
 }

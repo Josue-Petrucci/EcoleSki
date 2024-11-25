@@ -10,19 +10,24 @@ import be.jp.pojo.Accreditation;
 import be.jp.pojo.Instructor;
 import javax.swing.JLabel;
 import java.awt.Font;
+
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.border.TitledBorder;
 import java.awt.Color;
+import javax.swing.JComboBox;
 
 public class showInstructor extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private ShowsAllInstructor saiFrame;
+	private int row;
+	private ArrayList<Accreditation> listAccreditation = Accreditation.getAllAcreditation();
 	
 
 	/**
@@ -46,6 +51,7 @@ public class showInstructor extends JFrame {
 	 */
 	public showInstructor(ShowsAllInstructor saiFrame, Instructor instructor, int row) {
 		this.saiFrame = saiFrame;
+		this.row = row;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 475);
@@ -162,35 +168,6 @@ public class showInstructor extends JFrame {
 		lblCityD.setText(instructor.getCity());
 		lblPostalCodeD.setText(instructor.getPostalCode());
 		
-		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(null, "Accreditation", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(298, 48, 278, 224);
-		contentPane.add(panel);
-		panel.setLayout(null);
-		
-		int i = 15;
-		for(Accreditation a: Accreditation.getAllAcreditation()) {
-			JLabel lblAccreditation = new JLabel(a.getName());
-			lblAccreditation.setFont(new Font("Tahoma", Font.PLAIN, 15));
-			lblAccreditation.setBounds(10, i, 220, 25);
-			panel.add(lblAccreditation);
-		
-			if(instructor.isAccreditate(a)) {
-				JLabel lblYes = new JLabel("YES");
-				lblYes.setHorizontalAlignment(SwingConstants.CENTER);
-				lblYes.setBackground(new Color(0, 128, 0));
-				lblYes.setBounds(240, i, 30, 25);
-				panel.add(lblYes);
-			} else {
-				JLabel lblNo = new JLabel("NO");
-				lblNo.setHorizontalAlignment(SwingConstants.CENTER);
-				lblNo.setBackground(new Color(255, 0, 0));
-				lblNo.setBounds(240, i, 30, 25);
-				panel.add(lblNo);
-			}
-			i+=25;
-		}
-		
 		JButton btnUpdate = new JButton("Update");
 		btnUpdate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -212,6 +189,8 @@ public class showInstructor extends JFrame {
 		btnDelete.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnDelete.setBounds(10, 328, 278, 45);
 		contentPane.add(btnDelete);
+		
+		showAccreditation(instructor);
 	}
 	
 	private void delete(Instructor instructor, int row) {
@@ -219,5 +198,75 @@ public class showInstructor extends JFrame {
 			saiFrame.deleteTableRow(row);
 		}
 		dispose();
+	}
+	
+	private void showAccreditation(Instructor instructor) {
+		ArrayList<Accreditation> listAcAdd = new ArrayList<Accreditation>();
+		ArrayList<Accreditation> listAcDelete = new ArrayList<Accreditation>();
+		
+		JPanel panel = new JPanel();
+		panel.setBorder(new TitledBorder(null, "Accreditation", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel.setBounds(298, 48, 278, 380);
+		contentPane.add(panel);
+		panel.setLayout(null);
+		
+		int i = 15, x=0, y=0;
+		for(Accreditation a:listAccreditation) {
+			JLabel lblAccreditation = new JLabel(a.getName());
+			lblAccreditation.setFont(new Font("Tahoma", Font.PLAIN, 15));
+			lblAccreditation.setBounds(10, i, 220, 25);
+			panel.add(lblAccreditation);
+		
+			if(instructor.isAccreditate(a)) {
+				JLabel lblYes = new JLabel("YES");
+				lblYes.setHorizontalAlignment(SwingConstants.CENTER);
+				lblYes.setBackground(new Color(0, 128, 0));
+				lblYes.setBounds(240, i, 30, 25);
+				panel.add(lblYes);
+				listAcDelete.add(a);
+			} else {
+				JLabel lblNo = new JLabel("NO");
+				lblNo.setHorizontalAlignment(SwingConstants.CENTER);
+				lblNo.setBackground(new Color(255, 0, 0));
+				lblNo.setBounds(240, i, 30, 25);
+				panel.add(lblNo);
+				listAcAdd.add(a);
+			}
+			i+=25;
+		}
+		
+		JComboBox<String> cBAdd = new JComboBox(listAcAdd.stream().map(Accreditation::getName).toArray(String[]::new));
+		cBAdd.setBounds(10, 175, 258, 21);
+		panel.add(cBAdd);
+		
+		JButton btnAddAAccreditation = new JButton("Add a accreditation");
+		btnAddAAccreditation.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				instructor.manageAccreditation("Add", listAcAdd.get(cBAdd.getSelectedIndex()));
+				showInstructor sin = new showInstructor(saiFrame, instructor, row);
+				sin.setVisible(true);
+				dispose();
+			}
+		});
+		btnAddAAccreditation.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnAddAAccreditation.setBounds(10, 206, 258, 45);
+		panel.add(btnAddAAccreditation);
+		
+		JComboBox<String> cBDelete = new JComboBox(listAcDelete.stream().map(Accreditation::getName).toArray(String[]::new));
+		cBDelete.setBounds(10, 283, 258, 21);
+		panel.add(cBDelete);
+		
+		JButton btnDeleteAAccreditation = new JButton("Delete a accreditation");
+		btnDeleteAAccreditation.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				instructor.manageAccreditation("Delete", listAcDelete.get(cBDelete.getSelectedIndex()));
+				showInstructor sin = new showInstructor(saiFrame, instructor, row);
+				sin.setVisible(true);
+				dispose();
+			}
+		});
+		btnDeleteAAccreditation.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnDeleteAAccreditation.setBounds(10, 314, 258, 45);
+		panel.add(btnDeleteAAccreditation);
 	}
 }
