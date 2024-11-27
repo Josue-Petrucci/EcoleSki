@@ -94,5 +94,21 @@ public class HomePage extends JFrame {
 		});
 		btnSeeAllThe.setBounds(10, 55, 152, 21);
 		panel_1.add(btnSeeAllThe);
+		
+		JPanel panel_2 = new JPanel();
+		panel_2.setBorder(new TitledBorder(null, "Lesson", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_2.setBounds(10, 117, 147, 91);
+		contentPane.add(panel_2);
+		panel_2.setLayout(null);
+		
+		JButton btnCreateALesson = new JButton("Create a lesson");
+		btnCreateALesson.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CreateLesson createLesson = new CreateLesson();
+				createLesson.setVisible(true);
+			}
+		});
+		btnCreateALesson.setBounds(10, 25, 127, 21);
+		panel_2.add(btnCreateALesson);
 	}
 }

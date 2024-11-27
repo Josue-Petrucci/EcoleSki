@@ -13,7 +13,8 @@ import be.jp.dao.InstructorDAO;
 public class Instructor extends Person implements Serializable{
 	private static final long serialVersionUID = 8317097111846822301L;
 	private ArrayList<Accreditation> listAccreditation;
-	
+	private ArrayList<Lesson> listLesson = new ArrayList<Lesson>();
+
 	public ArrayList<Accreditation> getListAccreditation() {
 		return listAccreditation;
 	}
@@ -22,6 +23,14 @@ public class Instructor extends Person implements Serializable{
 		this.listAccreditation = listAccreditation;
 	}
 
+	public ArrayList<Lesson> getListLesson() {
+		return listLesson;
+	}
+
+	public void setListLesson(ArrayList<Lesson> listLesson) {
+		this.listLesson = listLesson;
+	}
+	
 	public Instructor() {}
 	
 	public Instructor(String name, String firstname, String email, String phone, Date dob, 
@@ -49,9 +58,16 @@ public class Instructor extends Person implements Serializable{
 		}
 	}
 	
-	public void deleteAccreditation(Accreditation ac) {
+	private void deleteAccreditation(Accreditation ac) {
 		if(listAccreditation.contains(ac))
 			listAccreditation.remove(ac);
+		else
+			JOptionPane.showMessageDialog(null, "Do not contain this accreditation !", "ERROR", JOptionPane.ERROR_MESSAGE);
+	}
+	
+	public void addLesson(Lesson l) {
+		if(!listLesson.contains(l))
+			listLesson.add(l);
 	}
 	
 	public String creatInstructor() {

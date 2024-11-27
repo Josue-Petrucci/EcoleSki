@@ -54,7 +54,7 @@ public class Accreditation implements Serializable {
 	}
 	
 	public void addLessonType(int idLessonType, String levelName, double price) {
-		LessonType lt = new LessonType(idLessonType, levelName, idLessonType, this);
+		LessonType lt = new LessonType(idLessonType, levelName, price, this);
 		if(!listLessonType.contains(lt)) {
 			listLessonType.add(lt);
 		}

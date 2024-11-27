@@ -1,7 +1,6 @@
 package be.jp.dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -103,7 +102,7 @@ public class AccreditationDAO extends DAO<Accreditation> {
 				if(existeAc != null) {
 					existeAc.addLessonType(rs.getInt("lid"), rs.getString("levelName"), rs.getInt("price"));
 				} else {
-					Accreditation ac = new Accreditation(acid, rs.getString("name"), rs.getInt("lid"), rs.getString("levelName"), rs.getInt("price"));
+					Accreditation ac = new Accreditation(acid, rs.getString("name"), rs.getInt("lid"), rs.getString("levelName"), rs.getDouble("price"));
 					acs.add(ac);
 				}
 			}

@@ -147,7 +147,7 @@ public class InstructorDAO extends DAO<Instructor> {
 				if(acid == lastAcid) {
 					ac.addLessonType(rs.getInt("lessontype_id"), rs.getString("lessontype_levelName"), rs.getInt("lessontype_price"));
 				} else {
-					ac = new Accreditation(acid, rs.getString("accreditation_name"), rs.getInt("lessontype_id"), rs.getString("lessontype_levelName"), rs.getInt("lessontype_price"));
+					ac = new Accreditation(acid, rs.getString("accreditation_name"), rs.getInt("lessontype_id"), rs.getString("lessontype_levelName"), rs.getDouble("lessontype_price"));
 				}
 				lastAcid = rs.getInt("accreditation_id");
 				
