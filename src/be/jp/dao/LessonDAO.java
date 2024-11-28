@@ -69,12 +69,10 @@ public class LessonDAO extends DAO<Lesson> {
 	public Lesson find(Lesson obj) {
 		Lesson lesson = null;
 		try {
-			String query = "SELECT id FROM es_lesson WHERE isprivate=? AND inid=? AND ltid=?";
+			String query = "SELECT id FROM es_lesson WHERE inid=?";
 			pst = conn.prepareStatement(query);
 			
-			pst.setBoolean(1, obj.getIsPrivate());
-			pst.setInt(2, obj.getInstructor().getId());
-			pst.setInt(3, obj.getLessonType().getId());
+			pst.setInt(1, obj.getInstructor().getId());
 			
 			ResultSet rs = pst.executeQuery();
 			if(rs.next()) {
