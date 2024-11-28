@@ -1,7 +1,9 @@
 package be.jp.pojo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
+import be.jp.dao.InstructorDAO;
 import be.jp.dao.LessonDAO;
 import be.jp.dao.SchoolSkyConnection;
 
@@ -73,6 +75,29 @@ public class Lesson implements Serializable {
 		manageMinMaxBookings();
 	}
 	
+	public Lesson(int id, int minBookings, int maxBookings, boolean isPrivate, int idInstructor, int idLessonType) {
+		this(id);
+		this.minBookings = minBookings;
+		this.maxBookings = maxBookings;
+		this.isPrivate = isPrivate;
+		configInstructorLessonType(idInstructor, idLessonType);
+	}
+	
+	private void configInstructorLessonType(int idInstructor, int idLessonType) {
+		InstructorDAO i = new InstructorDAO(SchoolSkyConnection.getInstance());
+		for(Instructor in:i.finds()) {
+			if(in.getId() == idInstructor) {
+				this.instructor = in;
+				for(Accreditation a: in.getListAccreditation()) {
+					for(LessonType lt:a.getListLessonType()) {
+						if(lt.getId() == idLessonType)
+							this.lessonType = lt;
+					}
+				}
+			}
+		}
+	}
+	
 	private void manageMinMaxBookings() {
 		if(lessonType.getAccreditation().getId() == 1 || lessonType.getAccreditation().getId() == 2) {
 			this.minBookings = 5;
@@ -111,5 +136,10 @@ public class Lesson implements Serializable {
 	public boolean createLesson() {
 		LessonDAO l = new LessonDAO(SchoolSkyConnection.getInstance());
 		return l.create(this);
+	}
+	
+	public static ArrayList<Lesson> getAllLesson(){
+		LessonDAO l = new LessonDAO(SchoolSkyConnection.getInstance());
+		return l.finds();
 	}
 }

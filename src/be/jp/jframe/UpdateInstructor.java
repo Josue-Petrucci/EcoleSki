@@ -164,7 +164,7 @@ public class UpdateInstructor extends JFrame {
 		btnUpdate.setBounds(156, 291, 85, 40);
 		contentPane.add(btnUpdate);
 		
-		JButton btnCancele = new JButton("Cancele");
+		JButton btnCancele = new JButton("Cancel");
 		btnCancele.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();

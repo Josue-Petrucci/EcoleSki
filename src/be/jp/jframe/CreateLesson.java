@@ -175,7 +175,7 @@ public class CreateLesson extends JFrame {
 		btnCreate.setBounds(10, 295, 430, 55);
 		contentPane.add(btnCreate);
 		
-		btnCancele = new JButton("Cancele");
+		btnCancele = new JButton("Cancel");
 		btnCancele.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();

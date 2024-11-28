@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -97,7 +98,7 @@ public class HomePage extends JFrame {
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new TitledBorder(null, "Lesson", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_2.setBounds(10, 117, 147, 91);
+		panel_2.setBounds(10, 117, 172, 91);
 		contentPane.add(panel_2);
 		panel_2.setLayout(null);
 		
@@ -108,7 +109,17 @@ public class HomePage extends JFrame {
 				createLesson.setVisible(true);
 			}
 		});
-		btnCreateALesson.setBounds(10, 25, 127, 21);
+		btnCreateALesson.setBounds(10, 25, 152, 21);
 		panel_2.add(btnCreateALesson);
+		
+		JButton btnSeeAllLesson = new JButton("See all the lesson");
+		btnSeeAllLesson.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ShowsAllLesson showsAllLesson = new ShowsAllLesson();
+				showsAllLesson.setVisible(true);
+			}
+		});
+		btnSeeAllLesson.setBounds(10, 56, 152, 21);
+		panel_2.add(btnSeeAllLesson);
 	}
 }

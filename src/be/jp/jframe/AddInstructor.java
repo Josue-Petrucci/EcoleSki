@@ -21,6 +21,7 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.SwingConstants;
 
 public class AddInstructor extends JFrame {
 
@@ -71,8 +72,9 @@ public class AddInstructor extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Add a Instructor");
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblNewLabel_1.setBounds(41, 10, 183, 20);
+		lblNewLabel_1.setBounds(0, 10, 270, 20);
 		contentPane.add(lblNewLabel_1);
 		
 		JLabel lblFirstname = new JLabel("Firstname:");
@@ -151,7 +153,7 @@ public class AddInstructor extends JFrame {
 		tfPostalCode.setBounds(135, 265, 120, 19);
 		contentPane.add(tfPostalCode);
 		
-		JButton btnCancele = new JButton("Cancele");
+		JButton btnCancele = new JButton("Cancel");
 		btnCancele.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();

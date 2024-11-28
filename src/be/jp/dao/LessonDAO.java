@@ -83,8 +83,33 @@ public class LessonDAO extends DAO<Lesson> {
 
 	@Override
 	public ArrayList<Lesson> finds() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Lesson> listLesson = new ArrayList<Lesson>();
+		Lesson lesson = null;
+		try {
+			String query = "SELECT * FROM es_lesson ORDER BY id ASC";
+			pst = conn.prepareStatement(query);
+			
+			ResultSet rs = pst.executeQuery();
+			while(rs.next()) {
+				lesson = new Lesson(
+						rs.getInt("id"),
+						rs.getInt("minbookings"),
+						rs.getInt("maxbookings"),
+						rs.getBoolean("isprivate"),
+						rs.getInt("inid"),
+						rs.getInt("ltid"));
+				listLesson.add(lesson);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+                if (pst != null) pst.close();                
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+		}
+		return listLesson;
 	}
 
 }
