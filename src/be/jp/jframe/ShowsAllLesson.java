@@ -3,6 +3,7 @@ package be.jp.jframe;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
@@ -81,10 +82,21 @@ public class ShowsAllLesson extends JFrame {
 		table = new JTable(model);
 		scrollPane.setViewportView(table);
 		
+		JButton button = new JButton("New button");
+		button.setBounds(678, 332, -120, -29);
+		contentPane.add(button);
+		
+		JButton btnDeleteLesson = new JButton("Delete");
+		btnDeleteLesson.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				deleteLesson();
+			}
+		});
+		btnDeleteLesson.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnDeleteLesson.setBounds(555, 289, 202, 64);
+		contentPane.add(btnDeleteLesson);
+		
 		showsAllLesson();
-		
-		
-		
 	}
 	
 	private void showsAllLesson() {
@@ -98,6 +110,20 @@ public class ShowsAllLesson extends JFrame {
 					l.getInstructor().getPhone(),
 					l.getMinBookings(),
 					l.getMaxBookings()});
+		}
+	}
+	
+	private void deleteLesson() {
+		int selectedRow = table.getSelectedRow();
+		if(selectedRow != -1) {
+			Lesson l = listLesson.get(selectedRow);
+			if(l.deleteLesson()) {
+				listLesson.remove(selectedRow);
+				model.removeRow(selectedRow);
+			}
+		} else {
+			JOptionPane.showMessageDialog(null, "You must choose a line !", "ERROR", JOptionPane.ERROR_MESSAGE);
+			return;
 		}
 	}
 }

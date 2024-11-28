@@ -45,7 +45,7 @@ public class Skier extends Person implements Serializable {
 	public boolean deleteSkier() {
 		SkierDAO s = new SkierDAO(SchoolSkyConnection.getInstance());
 		if(s.delete(this)) {
-			JOptionPane.showMessageDialog(null, "The person has been deleted !", "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, "The skier has been deleted !", "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
 			return true;
 		} else {
 			JOptionPane.showMessageDialog(null, "Deletion error, contact the IT manager !", "ERROR", JOptionPane.ERROR_MESSAGE);

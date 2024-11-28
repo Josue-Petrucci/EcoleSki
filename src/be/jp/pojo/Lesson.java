@@ -3,6 +3,8 @@ package be.jp.pojo;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import be.jp.dao.InstructorDAO;
 import be.jp.dao.LessonDAO;
 import be.jp.dao.SchoolSkyConnection;
@@ -141,5 +143,16 @@ public class Lesson implements Serializable {
 	public static ArrayList<Lesson> getAllLesson(){
 		LessonDAO l = new LessonDAO(SchoolSkyConnection.getInstance());
 		return l.finds();
+	}
+	
+	public boolean deleteLesson() {
+		LessonDAO l = new LessonDAO(SchoolSkyConnection.getInstance());
+		if(l.delete(this)) {
+			JOptionPane.showMessageDialog(null, "The Lesson has been deleted !", "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
+			return true;
+		} else {
+			JOptionPane.showMessageDialog(null, "Deletion error, contact the IT manager !", "ERROR", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
 	}
 }
