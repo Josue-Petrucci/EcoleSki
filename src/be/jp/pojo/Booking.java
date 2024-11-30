@@ -186,4 +186,9 @@ public class Booking implements Serializable{
 			}
 		}
 	}
+	
+	public boolean deleteBooking() {
+		BookingDAO b = new BookingDAO(SchoolSkyConnection.getInstance());
+		return b.delete(this);
+	}
 }
