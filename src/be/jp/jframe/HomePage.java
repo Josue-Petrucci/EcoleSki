@@ -12,6 +12,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.border.EtchedBorder;
 import java.awt.Color;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.SwingConstants;
 
 public class HomePage extends JFrame {
 
@@ -39,7 +42,7 @@ public class HomePage extends JFrame {
 	 */
 	public HomePage() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 396, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -48,7 +51,7 @@ public class HomePage extends JFrame {
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "Skier", TitledBorder.LEFT, TitledBorder.TOP, null, null));
-		panel.setBounds(10, 10, 147, 91);
+		panel.setBounds(10, 55, 172, 91);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -59,7 +62,7 @@ public class HomePage extends JFrame {
 				addSkier.setVisible(true);
 			}
 		});
-		btnCreatSkier.setBounds(10, 27, 127, 21);
+		btnCreatSkier.setBounds(10, 27, 152, 21);
 		panel.add(btnCreatSkier);
 		
 		JButton btnShowsAllSkier = new JButton("See all the skier");
@@ -69,12 +72,12 @@ public class HomePage extends JFrame {
 				showsAllSkier.setVisible(true);
 			}
 		});
-		btnShowsAllSkier.setBounds(10, 58, 127, 21);
+		btnShowsAllSkier.setBounds(10, 58, 152, 21);
 		panel.add(btnShowsAllSkier);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new TitledBorder(null, "Instructor", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_1.setBounds(165, 10, 172, 91);
+		panel_1.setBounds(204, 55, 172, 91);
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 		
@@ -100,7 +103,7 @@ public class HomePage extends JFrame {
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new TitledBorder(null, "Lesson", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_2.setBounds(10, 117, 172, 91);
+		panel_2.setBounds(10, 162, 172, 91);
 		contentPane.add(panel_2);
 		panel_2.setLayout(null);
 		
@@ -127,7 +130,7 @@ public class HomePage extends JFrame {
 		JPanel panel_2_1 = new JPanel();
 		panel_2_1.setLayout(null);
 		panel_2_1.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Booking", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel_2_1.setBounds(204, 111, 172, 91);
+		panel_2_1.setBounds(204, 162, 172, 91);
 		contentPane.add(panel_2_1);
 		
 		JButton btnCreateBooking = new JButton("Create a booking");
@@ -149,5 +152,11 @@ public class HomePage extends JFrame {
 		});
 		btnSeeAllBooking.setBounds(10, 56, 152, 21);
 		panel_2_1.add(btnSeeAllBooking);
+		
+		JLabel lblNewLabel = new JLabel("École de ski du Domaine Châtelet");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblNewLabel.setBounds(0, 10, 382, 30);
+		contentPane.add(lblNewLabel);
 	}
 }

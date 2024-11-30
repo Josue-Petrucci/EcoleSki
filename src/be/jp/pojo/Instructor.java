@@ -50,6 +50,10 @@ public class Instructor extends Person implements Serializable{
 			String street, String houseNbr, String city, String postalCode) {
 		super(name, firstname, email, phone, dob, street, houseNbr, city, postalCode);
 	}
+	
+	public Instructor(int id) {
+		this.id = id;
+	}
 
 	public void addAccreditation(Accreditation ac) {
 		if(!listAccreditation.contains(ac)) {
@@ -158,5 +162,10 @@ public class Instructor extends Person implements Serializable{
 				return;
 			}
 		}
+	}
+	
+	public Instructor isExist() {
+		InstructorDAO i = new InstructorDAO(SchoolSkyConnection.getInstance());
+		return i.find(this);
 	}
 }

@@ -34,6 +34,10 @@ public class Skier extends Person implements Serializable {
 		this.id = id;
 	}
 	
+	public Skier(int id) {
+		this.id = id;
+	}
+	
 	public String creatSkier() {
 		String message = this.verifietForm();
 		if(message == null) {
@@ -91,5 +95,10 @@ public class Skier extends Person implements Serializable {
 	public void addBooking(Booking booking) {
 		if(!listBooking.contains(booking))
 			listBooking.add(booking);
+	}
+	
+	public Skier isExist() {
+		SkierDAO s = new SkierDAO(SchoolSkyConnection.getInstance());
+		return s.find(this);
 	}
 }

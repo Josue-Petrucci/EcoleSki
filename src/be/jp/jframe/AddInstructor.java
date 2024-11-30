@@ -202,14 +202,19 @@ public class AddInstructor extends JFrame {
 		Accreditation a = acs.get(cbAccreditation.getSelectedIndex());
 		
 		Instructor i = new Instructor(name, firstname, email, phone, dob, street, house, city, postalCode, a);
-		String message = i.creatInstructor();
-		
-		if(message != null) {
-			if(!message.isEmpty()) {
-				JOptionPane.showMessageDialog(this, message, "ERROR", JOptionPane.ERROR_MESSAGE);
-	            return;
+		if(i.isExist() == null) {
+			String message = i.creatInstructor();
+			
+			if(message != null) {
+				if(!message.isEmpty()) {
+					JOptionPane.showMessageDialog(this, message, "ERROR", JOptionPane.ERROR_MESSAGE);
+		            return;
+				}
 			}
+			dispose();
+		} else {
+			JOptionPane.showMessageDialog(this, "This phone is already use !", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return;
 		}
-		dispose();
 	}
 }

@@ -118,8 +118,27 @@ public class InstructorDAO extends DAO<Instructor> {
 
 	@Override
 	public Instructor find(Instructor obj) {
-		// TODO Auto-generated method stub
-		return null;
+		Instructor instructor = null;
+		try {
+			String query = "SELECT id FROM es_instructor WHERE phone=?";
+			pst = conn.prepareStatement(query);
+			
+			pst.setString(1, obj.getPhone());
+			
+			ResultSet rs = pst.executeQuery();
+			if(rs.next()) {
+				instructor = new Instructor(rs.getInt("id"));
+			}
+		} catch(SQLException ex) {
+			ex.printStackTrace();
+		} finally {
+			try {
+                if (pst != null) pst.close();                
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+		}
+		return instructor;
 	}
 
 	@Override

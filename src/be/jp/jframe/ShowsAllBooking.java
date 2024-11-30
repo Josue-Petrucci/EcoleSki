@@ -76,6 +76,7 @@ public class ShowsAllBooking extends JFrame {
 				"Name instructor", 
 				"Name Skier",
 				"Schedule",
+				"Date",
 				"Price"} , 0);
 		table = new JTable(model);
 		scrollPane.setViewportView(table);
@@ -181,6 +182,7 @@ public class ShowsAllBooking extends JFrame {
 					b.getLesson().getInstructor().getName().toUpperCase() + " " + b.getLesson().getInstructor().getFirstname().toUpperCase(),
 					b.getSkier().getName().toUpperCase() + " " + b.getSkier().getFirstname().toUpperCase(),
 					b.getSchedules(),
+					b.getFirstDate() + " au " + b.getLastDate(),
 					b.calculatePrice()});
 		}
 	}
@@ -197,6 +199,7 @@ public class ShowsAllBooking extends JFrame {
 						b.getLesson().getInstructor().getName().toUpperCase() + " " + b.getLesson().getInstructor().getFirstname().toUpperCase(),
 						b.getSkier().getName().toUpperCase() + " " + b.getSkier().getFirstname().toUpperCase(),
 						b.getSchedules(),
+						b.getFirstDate() + " au " + b.getLastDate(),
 						b.calculatePrice()});
 			}
 		}
@@ -214,6 +217,7 @@ public class ShowsAllBooking extends JFrame {
 						b.getLesson().getInstructor().getName().toUpperCase() + " " + b.getLesson().getInstructor().getFirstname().toUpperCase(),
 						b.getSkier().getName().toUpperCase() + " " + b.getSkier().getFirstname().toUpperCase(),
 						b.getSchedules(),
+						b.getFirstDate() + " au " + b.getLastDate(),
 						b.calculatePrice()});
 			}
 		}

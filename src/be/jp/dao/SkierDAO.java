@@ -91,8 +91,27 @@ public class SkierDAO extends DAO<Skier> {
 
 	@Override
 	public Skier find(Skier obj) {
-		// TODO Auto-generated method stub
-		return null;
+		Skier skier = null;
+		try {
+			String query = "SELECT id FROM es_skier WHERE phone=?";
+			pst = conn.prepareStatement(query);
+			
+			pst.setString(1, obj.getPhone());
+			
+			ResultSet rs = pst.executeQuery();
+			if(rs.next()) {
+				skier = new Skier(rs.getInt("id"));
+			}
+		} catch(SQLException ex) {
+			ex.printStackTrace();
+		} finally {
+			try {
+                if (pst != null) pst.close();                
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+		}
+		return skier;
 	}
 
 	@Override

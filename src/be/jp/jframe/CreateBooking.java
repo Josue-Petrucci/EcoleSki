@@ -417,10 +417,15 @@ public class CreateBooking extends JFrame {
 				dateChooser.getDate(),
 				lesson,
 				skier);
-		if(booking.createBooking())
-			JOptionPane.showMessageDialog(null, "A lesson has been created !", "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
-		else
-			JOptionPane.showMessageDialog(null, "Creation error, contact the IT manager !", "ERROR", JOptionPane.ERROR_MESSAGE);
-		dispose();
+		if(booking.hasPlace()) {
+			if(booking.createBooking())
+				JOptionPane.showMessageDialog(null, "A lesson has been created !", "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
+			else
+				JOptionPane.showMessageDialog(null, "Creation error, contact the IT manager !", "ERROR", JOptionPane.ERROR_MESSAGE);
+			dispose();
+		} else {
+			JOptionPane.showMessageDialog(null, "There are too many registered to this lesson !", "ERROR", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
 	}
 }

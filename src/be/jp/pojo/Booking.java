@@ -191,4 +191,16 @@ public class Booking implements Serializable{
 		BookingDAO b = new BookingDAO(SchoolSkyConnection.getInstance());
 		return b.delete(this);
 	}
+	
+	public boolean hasPlace() {
+	    int nbr = 0;
+	    for (Booking b : getAllBooking()) {
+	        if (this.getLesson().getId() == b.getLesson().getId() && 
+	            this.getFirstDate().equals(b.getFirstDate()) && 
+	            this.getSchedules().equals(b.getSchedules())) {
+	            nbr++;
+	        }
+	    }
+	    return nbr >= this.getLesson().getMaxBookings();
+	}
 }

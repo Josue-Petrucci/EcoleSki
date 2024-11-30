@@ -179,14 +179,18 @@ public class AddSkier extends JFrame {
 		String postalCode = tfPostalCode.getText();
 		
 		Skier skier = new Skier(name, firstname, email, phone, dob, street, house, city, postalCode);
-		String message = skier.creatSkier();
-		
-		if(message != null) {
-			if(!message.isEmpty()) {
-				JOptionPane.showMessageDialog(this, message, "ERROR", JOptionPane.ERROR_MESSAGE);
-	            return;
+		if(skier.isExist() == null) {
+			String message = skier.creatSkier();
+			if(message != null) {
+				if(!message.isEmpty()) {
+					JOptionPane.showMessageDialog(this, message, "ERROR", JOptionPane.ERROR_MESSAGE);
+		            return;
+				}
 			}
+			dispose();
+		} else {
+			JOptionPane.showMessageDialog(this, "This phone is already use !", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return;
 		}
-		dispose();
 	}
 }
