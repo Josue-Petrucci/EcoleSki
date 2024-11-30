@@ -70,7 +70,7 @@ public class BookingDAO extends DAO<Booking>  {
 		Booking booking = null;
 		try {
 			String query = "SELECT b.id AS idbooking,hasInsurance,schedules,firstDate,lastDate,lid,sid,pid,startDate,endDate,isVacation "
-					     + "FROM es_booking b, es_period p WHERE b.pid=p.id ORDER BY id ASC";
+					     + "FROM es_booking b, es_period p WHERE b.pid=p.id ORDER BY b.id ASC";
 			pst = conn.prepareStatement(query);
 			
 			ResultSet rs = pst.executeQuery();

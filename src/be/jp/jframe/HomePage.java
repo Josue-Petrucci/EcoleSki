@@ -143,6 +143,8 @@ public class HomePage extends JFrame {
 		JButton btnSeeAllBooking = new JButton("See all the booking");
 		btnSeeAllBooking.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				ShowsAllBooking showAllBooking = new ShowsAllBooking();
+				showAllBooking.setVisible(true);
 			}
 		});
 		btnSeeAllBooking.setBounds(10, 56, 152, 21);
