@@ -9,7 +9,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import be.jp.pojo.Accreditation;
-import be.jp.pojo.Instructor;
 import be.jp.pojo.Lesson;
 
 import javax.swing.JScrollPane;
@@ -19,6 +18,7 @@ import java.awt.Font;
 import javax.swing.JTable;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
@@ -30,8 +30,9 @@ public class ShowsAllLesson extends JFrame {
 	private JPanel contentPane;
 	private JTable table;
 	private DefaultTableModel model;
-	private ArrayList<Lesson> listLesson;
+	private ArrayList<Lesson> listLesson = Lesson.getAllLesson();;
 	private JTextField tfName;
+	private List<Lesson> filteredLessons = new ArrayList<>();
 
 	/**
 	 * Launch the application.
@@ -52,9 +53,7 @@ public class ShowsAllLesson extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ShowsAllLesson() {
-		this.listLesson = Lesson.getAllLesson();
-		
+	public ShowsAllLesson() {		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 900, 400);
 		contentPane = new JPanel();
@@ -159,7 +158,9 @@ public class ShowsAllLesson extends JFrame {
 	}
 	
 	private void showsAllLesson() {
+		filteredLessons.clear();
 		for(Lesson l:listLesson) {
+			filteredLessons.add(l);
 			model.addRow(new Object[] {
 					l.getId(),
 					l.getLessonType().getAccreditation().getName(),
@@ -175,9 +176,10 @@ public class ShowsAllLesson extends JFrame {
 	private void deleteLesson() {
 		int selectedRow = table.getSelectedRow();
 		if(selectedRow != -1) {
-			Lesson l = listLesson.get(selectedRow);
+			Lesson l = filteredLessons.get(selectedRow);
 			if(l.deleteLesson()) {
-				listLesson.remove(selectedRow);
+				listLesson.remove(l);
+				filteredLessons.remove(selectedRow);
 				model.removeRow(selectedRow);
 			}
 		} else {
@@ -187,8 +189,10 @@ public class ShowsAllLesson extends JFrame {
 	}
 	
 	private void researchAccreditation(Accreditation accreditation) {
+		filteredLessons.clear();
 		for(Lesson l:listLesson) {
 			if(l.getLessonType().getAccreditation().equals(accreditation)) {
+				filteredLessons.add(l);
 					model.addRow(new Object[] {
 							l.getId(),
 							l.getLessonType().getAccreditation().getName(),
@@ -203,8 +207,10 @@ public class ShowsAllLesson extends JFrame {
 	}
 	
 	private void researchInstructor(String nameInstructor) {
+		filteredLessons.clear();
 		for(Lesson l:listLesson) {
 			if(l.getInstructor().getName().equals(nameInstructor)) {
+				filteredLessons.add(l);
 					model.addRow(new Object[] {
 							l.getId(),
 							l.getLessonType().getAccreditation().getName(),

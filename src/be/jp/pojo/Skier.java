@@ -11,6 +11,15 @@ import be.jp.dao.SkierDAO;
 
 public class Skier extends Person implements Serializable {
 	private static final long serialVersionUID = -1385894825879357159L;
+	private ArrayList<Booking> listBooking = new ArrayList<Booking>();
+
+	public ArrayList<Booking> getListBooking() {
+		return listBooking;
+	}
+
+	public void setListBooking(ArrayList<Booking> listBooking) {
+		this.listBooking = listBooking;
+	}
 
 	public Skier() {}
 	
@@ -77,5 +86,10 @@ public class Skier extends Person implements Serializable {
 			JOptionPane.showMessageDialog(null, message, "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
 			return false;
 		}
+	}
+	
+	public void addBooking(Booking booking) {
+		if(!listBooking.contains(booking))
+			listBooking.add(booking);
 	}
 }

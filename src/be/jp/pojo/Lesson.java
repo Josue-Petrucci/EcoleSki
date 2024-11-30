@@ -17,6 +17,7 @@ public class Lesson implements Serializable {
 	private Instructor instructor;
 	private LessonType lessonType;
 	private boolean isPrivate;
+	private ArrayList<Booking> listBooking = new ArrayList<Booking>();
 
 	public int getId() {
 		return id;
@@ -66,6 +67,14 @@ public class Lesson implements Serializable {
 		this.isPrivate = isPrivate;
 	}
 	
+	public ArrayList<Booking> getListBooking() {
+		return listBooking;
+	}
+
+	public void setListBooking(ArrayList<Booking> listBooking) {
+		this.listBooking = listBooking;
+	}
+	
 	public Lesson() {}
 	
 	public Lesson(int id) { this.id = id;}
@@ -90,10 +99,13 @@ public class Lesson implements Serializable {
 		for(Instructor in:i.finds()) {
 			if(in.getId() == idInstructor) {
 				this.instructor = in;
+				this.instructor.addLesson(this);
 				for(Accreditation a: in.getListAccreditation()) {
 					for(LessonType lt:a.getListLessonType()) {
-						if(lt.getId() == idLessonType)
+						if(lt.getId() == idLessonType) {
 							this.lessonType = lt;
+							this.lessonType.addLesson(this);
+						}
 					}
 				}
 			}
@@ -101,23 +113,34 @@ public class Lesson implements Serializable {
 	}
 	
 	private void manageMinMaxBookings() {
-		if(lessonType.getAccreditation().getId() == 1 || lessonType.getAccreditation().getId() == 2) {
-			this.minBookings = 5;
-			this.maxBookings = 8;
-		} else {
-			if(lessonType.getAccreditation().getId() == 3 || lessonType.getAccreditation().getId() == 4) {
-				if(lessonType.getLevelName().equals("Compétition") || lessonType.getLevelName().equals("Hors-piste")) {
-					this.minBookings = 5;
-					this.maxBookings = 8;
+		if(!isPrivate) {
+			if(lessonType.getAccreditation().getId() == 1 || lessonType.getAccreditation().getId() == 2) {
+				this.minBookings = 5;
+				this.maxBookings = 8;
+			} else {
+				if(lessonType.getAccreditation().getId() == 3 || lessonType.getAccreditation().getId() == 4) {
+					if(lessonType.getLevelName().equals("Compétition") || lessonType.getLevelName().equals("Hors-piste")) {
+						this.minBookings = 5;
+						this.maxBookings = 8;
+					} else {
+						this.minBookings = 6;
+						this.maxBookings = 10;
+					}
 				} else {
 					this.minBookings = 6;
 					this.maxBookings = 10;
 				}
-			} else {
-				this.minBookings = 6;
-				this.maxBookings = 10;
 			}
+		} else {
+			this.minBookings = 1;
+			this.maxBookings = 1;
 		}
+		
+	}
+	
+	public void addBooking(Booking booking) {
+		if(!listBooking.contains(booking))
+			listBooking.add(booking);
 	}
 	
 	public double getLessonPrice(int nbrHours) {

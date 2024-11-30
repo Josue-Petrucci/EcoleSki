@@ -10,6 +10,8 @@ import javax.swing.border.TitledBorder;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.border.EtchedBorder;
+import java.awt.Color;
 
 public class HomePage extends JFrame {
 
@@ -121,5 +123,29 @@ public class HomePage extends JFrame {
 		});
 		btnSeeAllLesson.setBounds(10, 56, 152, 21);
 		panel_2.add(btnSeeAllLesson);
+		
+		JPanel panel_2_1 = new JPanel();
+		panel_2_1.setLayout(null);
+		panel_2_1.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Booking", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel_2_1.setBounds(204, 111, 172, 91);
+		contentPane.add(panel_2_1);
+		
+		JButton btnCreateBooking = new JButton("Create a booking");
+		btnCreateBooking.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CreateBooking createBooking = new CreateBooking();
+				createBooking.setVisible(true);
+			}
+		});
+		btnCreateBooking.setBounds(10, 25, 152, 21);
+		panel_2_1.add(btnCreateBooking);
+		
+		JButton btnSeeAllBooking = new JButton("See all the booking");
+		btnSeeAllBooking.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnSeeAllBooking.setBounds(10, 56, 152, 21);
+		panel_2_1.add(btnSeeAllBooking);
 	}
 }
