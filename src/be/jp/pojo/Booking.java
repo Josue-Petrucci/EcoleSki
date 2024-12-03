@@ -193,7 +193,7 @@ public class Booking implements Serializable{
 	}
 	
 	public boolean hasPlace() {
-	    int nbr = 0;
+	    int nbr = 1;
 	    for (Booking b : getAllBooking()) {
 	        if (this.getLesson().getId() == b.getLesson().getId() && 
 	            this.getFirstDate().equals(b.getFirstDate()) && 
@@ -201,6 +201,6 @@ public class Booking implements Serializable{
 	            nbr++;
 	        }
 	    }
-	    return nbr >= this.getLesson().getMaxBookings();
+	    return nbr < this.getLesson().getMaxBookings();
 	}
 }

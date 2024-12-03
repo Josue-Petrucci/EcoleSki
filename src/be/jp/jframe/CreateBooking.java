@@ -419,7 +419,7 @@ public class CreateBooking extends JFrame {
 				skier);
 		if(booking.hasPlace()) {
 			if(booking.createBooking())
-				JOptionPane.showMessageDialog(null, "A lesson has been created !", "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(null, "A booking has been created !", "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
 			else
 				JOptionPane.showMessageDialog(null, "Creation error, contact the IT manager !", "ERROR", JOptionPane.ERROR_MESSAGE);
 			dispose();
